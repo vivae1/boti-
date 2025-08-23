@@ -1,0 +1,8 @@
+{
+  "name": "booty-bot-proxy",
+  "version": "1.0.0",
+  "description": "Secure proxy for Gemini API",
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
