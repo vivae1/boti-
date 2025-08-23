@@ -2,6 +2,12 @@
 
 const fetch = require('node-fetch');
 
+// --- Rate Limiter Setup ---
+// This map will store IP addresses and their request counts.
+const rateLimitStore = new Map();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 10; // Allow 10 requests per minute per user
+
 module.exports = async (req, res) => {
     // This line allows your Google Site and the development environment to make requests.
     res.setHeader('Access-Control-Allow-Origin', '*'); // Allows all origins for easier debugging
@@ -12,6 +18,33 @@ module.exports = async (req, res) => {
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
     }
+
+    // --- Rate Limiter Logic ---
+    // Get the user's IP address. Vercel provides this in the 'x-forwarded-for' header.
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    
+    const now = Date.now();
+    const userRecord = rateLimitStore.get(ip);
+
+    if (!userRecord) {
+        // First request from this IP in a while
+        rateLimitStore.set(ip, { count: 1, startTime: now });
+    } else {
+        // Check if the window has reset
+        if (now - userRecord.startTime > RATE_LIMIT_WINDOW_MS) {
+            userRecord.startTime = now;
+            userRecord.count = 1;
+        } else {
+            userRecord.count++;
+        }
+
+        // If the user has exceeded the limit, block them.
+        if (userRecord.count > MAX_REQUESTS_PER_WINDOW) {
+            return res.status(429).json({ error: 'Too many requests. Please wait a minute.' });
+        }
+    }
+    // --- End of Rate Limiter Logic ---
+
 
     // Securely get the API key from Vercel's environment variables
     const apiKey = process.env.GEMINI_API_KEY;
