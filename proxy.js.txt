@@ -1,0 +1,39 @@
+// In file: /api/proxy.js
+
+const fetch = require('node-fetch');
+
+module.exports = async (req, res) => {
+    // Allow requests from any origin (for simplicity)
+    // For production, you should restrict this to your Google Sites URL
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    // Handle preflight OPTIONS request for CORS
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+
+    // Securely get the API key from Vercel's environment variables
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+        return res.status(500).json({ error: 'API key not configured.' });
+    }
+
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+    try {
+        const geminiResponse = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(req.body) // Forward the client's request body
+        });
+
+        const data = await geminiResponse.json();
+        res.status(200).json(data); // Send Gemini's response back to the client
+
+    } catch (error) {
+        console.error('Error proxying request:', error);
+        res.status(500).json({ error: 'Failed to fetch from Gemini API.' });
+    }
+};
