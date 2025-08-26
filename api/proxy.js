@@ -31,12 +31,11 @@ module.exports = async (req, res) => {
 
         const data = await geminiResponse.json();
 
-        // ** NEW: Check for quota error from Google **
-        // Google's quota errors often have a 429 status code.
-        if (geminiResponse.status === 429 || (data.error && data.error.message.toLowerCase().includes('quota'))) {
+        // ** IMPROVED: Check for quota error from Google more specifically **
+        if (geminiResponse.status === 429 || (data.error && data.error.message.toLowerCase().includes('quota has been exceeded'))) {
             console.warn('Gemini API quota exceeded.');
             // Send a specific, identifiable error back to the client.
-            return res.status(429).json({ error: 'QUOTA_EXCEEDED' });
+            return res.status(429).json({ errorType: 'QUOTA_EXCEEDED', originalError: data.error.message });
         }
         
         if (data.error) {
