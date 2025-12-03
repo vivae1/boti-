@@ -1,4 +1,4 @@
-// ה-fetch מובנה ב-Node.js 18+, אין צורך ב-require
+// ה-fetch מובנה ב-Node.js 18+, אין צורך ב-require או import
 
 // --- Rate Limiter Setup ---
 // הערה: ב-Serverless המשתנה הזה מתאפס לעיתים קרובות, זה תקין לשימוש בסיסי
