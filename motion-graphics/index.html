@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>55 סגנונות Motion Graphics</title>
+<meta name="description" content="גלריית וידאו חיה של 55 סגנונות מושן גרפיקס, עם הסבר בעברית לכל סגנון: מתי להשתמש בו, איך בונים אותו ובאילו כלים.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=Karantina:wght@400;700&display=swap">
+<style>
+/* Layout: an editing-suite bin. A sticky toolbar (search, category tracks, a 55-tick ruler with a playhead)
+   sits over a grid of clip cards; opening a clip shows a monitor with transport controls beside its notes. */
+:root {
+  --bg: #ECEEF3;
+  --surface: #FFFFFF;
+  --surface-2: #E1E4EB;
+  --ink: #14151C;
+  --muted: #565B6E;
+  --line: #CDD1DC;
+  --accent: #2A33E0;
+  --accent-ink: #FFFFFF;
+  --monitor: #0B0C10;
+  --monitor-ink: #E8EAF0;
+  --monitor-muted: #9298AC;
+  --monitor-line: #262833;
+  --scrim: rgba(6, 7, 10, 0.72);
+  --shadow: 0 1px 2px rgba(20, 22, 40, 0.06), 0 10px 28px -14px rgba(20, 22, 40, 0.22);
+
+  --c-type: #E5484D;
+  --c-2d: #E9850F;
+  --c-3d: #5E9A12;
+  --c-retro: #D63A90;
+  --c-abstract: #7E4CEB;
+  --c-digital: #0897BA;
+  --c-ui: #0F9A74;
+  --c-craft: #A5703C;
+
+  --f-display: "Karantina", "Arial Narrow", "Arial Hebrew", sans-serif;
+  --f-body: "IBM Plex Sans Hebrew", "Arial Hebrew", "Segoe UI", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D0E13;
+    --surface: #16181F;
+    --surface-2: #20232C;
+    --ink: #ECEEF4;
+    --muted: #9AA0B2;
+    --line: #2A2E3A;
+    --accent: #8F96FF;
+    --accent-ink: #0D0E13;
+    --monitor: #050608;
+    --monitor-line: #1E2029;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 30px -14px rgba(0, 0, 0, 0.7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D0E13;
+  --surface: #16181F;
+  --surface-2: #20232C;
+  --ink: #ECEEF4;
+  --muted: #9AA0B2;
+  --line: #2A2E3A;
+  --accent: #8F96FF;
+  --accent-ink: #0D0E13;
+  --monitor: #050608;
+  --monitor-line: #1E2029;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 30px -14px rgba(0, 0, 0, 0.7);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.55 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+body:has(dialog[open]) { overflow: hidden; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.page {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 3.5vw, 44px);
+}
+
+/* ---------- masthead ---------- */
+.mast { padding-block: clamp(28px, 5vw, 56px) 22px; display: grid; gap: 16px; }
+.mast-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.eyebrow { font-size: 14px; font-weight: 500; color: var(--muted); }
+.eyebrow .latin { font: 500 12px/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+.mast h1 {
+  margin: 0;
+  font: 700 clamp(58px, 10.5vw, 150px)/0.84 var(--f-display);
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+.mast h1 .h1-en { color: var(--accent); white-space: nowrap; }
+.lede { margin: 0; max-width: 64ch; font-size: clamp(16px, 1.6vw, 18px); color: var(--muted); }
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--muted);
+}
+.facts b { font: 500 14px var(--f-mono); color: var(--ink); }
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding-inline: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.icon-btn:hover { border-color: var(--ink); }
+.icon-btn svg { width: 16px; height: 16px; flex: none; }
+
+/* ---------- toolbar ---------- */
+.toolbar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  margin-inline: calc(-1 * clamp(16px, 3.5vw, 44px));
+  padding: 12px clamp(16px, 3.5vw, 44px) 0;
+  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.tool-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.search { position: relative; flex: 1 1 260px; min-width: 0; }
+.search svg { position: absolute; inset-inline-start: 12px; top: 50%; translate: 0 -50%; width: 16px; height: 16px; color: var(--muted); pointer-events: none; }
+.search input {
+  width: 100%;
+  height: 40px;
+  padding-inline: 38px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  font-size: 15px;
+}
+.search input::placeholder { color: var(--muted); opacity: 0.85; }
+.count { font: 500 13px var(--f-mono); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.chips { display: flex; gap: 6px; margin-top: 10px; overflow-x: auto; scrollbar-width: none; padding-block: 2px; }
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding-inline: 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.chip:hover { border-color: var(--ink); }
+.chip .n { font: 500 11px var(--f-mono); color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip[aria-pressed="true"] .n { color: inherit; opacity: 0.7; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--ink)); flex: none; }
+
+.ruler { position: relative; display: flex; height: 34px; margin-top: 8px; }
+.tick {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.tick::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  height: 9px;
+  margin-left: -1px;
+  border-radius: 1px 1px 0 0;
+  background: var(--c);
+  transition: height 0.15s ease, opacity 0.2s;
+}
+.tick.major::before { height: 15px; }
+.tick:hover::before { height: 22px; }
+.tick.dim::before { opacity: 0.18; }
+.tick .n {
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  translate: -50% 0;
+  font: 500 10px/1 var(--f-mono);
+  color: var(--muted);
+  pointer-events: none;
+}
+.playhead {
+  position: absolute;
+  top: 12px;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--accent);
+  pointer-events: none;
+  transition: left 0.25s ease;
+}
+.playhead::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -4px;
+  border: 5px solid transparent;
+  border-top: 7px solid var(--accent);
+}
+
+/* ---------- grid ---------- */
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 24px 0 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+  gap: 22px 20px;
+}
+.clip {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.clip:hover { border-color: var(--ink); box-shadow: var(--shadow); }
+.clip:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.screen { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: var(--monitor); }
+.screen canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+  font: 500 12px/1 var(--f-mono);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.meta .tc { margin-inline-start: auto; color: var(--ink); }
+.meta .rec { display: inline-block; width: 7px; height: 7px; margin-inline-end: 6px; border-radius: 50%; background: var(--c); vertical-align: 1px; }
+.info { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px 16px; flex: 1; min-width: 0; }
+.info h3 { margin: 0; font: 600 18px/1.3 var(--f-body); }
+.info h3 button { all: unset; cursor: pointer; }
+.info h3 button::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.info h3 button:focus-visible { outline: none; }
+.en { margin: 0; font: 400 12px/1.4 var(--f-mono); color: var(--muted); text-align: right; }
+.desc { margin: 6px 0 0; font-size: 14px; line-height: 1.6; color: var(--muted); }
+.tagrow { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 12px; font-size: 13px; font-weight: 500; color: var(--muted); }
+.level { margin-inline-start: auto; display: inline-flex; align-items: flex-end; gap: 2px; direction: ltr; }
+.level i { display: block; width: 4px; border-radius: 1px; background: var(--line); }
+.level i:nth-child(1) { height: 6px; }
+.level i:nth-child(2) { height: 9px; }
+.level i:nth-child(3) { height: 12px; }
+.level i.on { background: var(--ink); }
+.level-label { font: 500 11px var(--f-mono); }
+
+.empty { padding: 48px 0 64px; text-align: center; color: var(--muted); }
+.empty p { margin: 0 auto 14px; max-width: 46ch; }
+
+.foot {
+  display: grid;
+  gap: 10px;
+  padding-block: 28px 48px;
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--muted);
+}
+.foot p { margin: 0; max-width: 78ch; }
+kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--surface);
+  font: 500 12px/1.4 var(--f-mono);
+  text-align: center;
+  color: var(--ink);
+}
+
+/* ---------- viewer ---------- */
+dialog.viewer {
+  width: min(1280px, calc(100% - 24px));
+  max-width: none;
+  max-height: calc(100% - 24px);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--ink);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+dialog.viewer::backdrop { background: var(--scrim); }
+.v-grid { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); }
+.v-monitor { display: flex; flex-direction: column; min-width: 0; background: var(--monitor); color: var(--monitor-ink); }
+.v-screen { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: var(--monitor); }
+.v-screen canvas, .v-screen .v-video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; border: 0; }
+.v-screen:fullscreen { aspect-ratio: auto; width: 100vw; height: 100vh; }
+.v-screen:fullscreen canvas { object-fit: contain; }
+.v-tabs { display: flex; gap: 4px; padding: 10px 12px 0; }
+.v-tab {
+  height: 30px;
+  padding-inline: 12px;
+  border: 1px solid var(--monitor-line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--monitor-muted);
+  font-size: 13px;
+  cursor: pointer;
+}
+.v-tab[aria-selected="true"] { background: var(--monitor-ink); color: var(--monitor); border-color: var(--monitor-ink); }
+.v-transport {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--monitor-line);
+  direction: ltr;
+}
+.t-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border: 1px solid var(--monitor-line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--monitor-ink);
+  cursor: pointer;
+}
+.t-btn:hover { border-color: var(--monitor-ink); }
+.t-btn svg { width: 16px; height: 16px; }
+.tc { font: 500 13px/1 var(--f-mono); font-variant-numeric: tabular-nums; color: var(--monitor-ink); white-space: nowrap; }
+.tc.dim { color: var(--monitor-muted); }
+.scrub { flex: 1; min-width: 80px; accent-color: #8F96FF; height: 24px; cursor: pointer; }
+.speed { display: inline-flex; border: 1px solid var(--monitor-line); border-radius: 8px; overflow: hidden; flex: none; }
+.speed button {
+  height: 36px;
+  padding-inline: 10px;
+  border: 0;
+  background: transparent;
+  color: var(--monitor-muted);
+  font: 500 12px var(--f-mono);
+  cursor: pointer;
+}
+.speed button[aria-pressed="true"] { background: var(--monitor-ink); color: var(--monitor); }
+.v-hint { padding: 0 14px 14px; font-size: 12px; color: var(--monitor-muted); direction: rtl; }
+.v-hint kbd { background: transparent; color: var(--monitor-ink); border-color: var(--monitor-line); }
+
+.v-info { display: flex; flex-direction: column; gap: 16px; min-width: 0; padding: 22px 24px 24px; }
+.v-head { display: flex; align-items: center; gap: 10px; }
+.v-no { font: 500 13px var(--f-mono); color: var(--muted); }
+.v-cat { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--muted); }
+.v-close { margin-inline-start: auto; }
+.v-title { margin: 0; font: 700 clamp(40px, 4.4vw, 60px)/0.92 var(--f-display); text-wrap: balance; }
+.v-en { margin: -8px 0 0; font: 400 13px var(--f-mono); color: var(--muted); text-align: right; }
+.v-desc { margin: 0; font-size: 16px; line-height: 1.65; }
+.specs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; border: 1px solid var(--line); border-radius: 8px; }
+.specs div { padding: 10px 12px; min-width: 0; }
+.specs div + div { border-inline-start: 1px solid var(--line); }
+.specs dt { font-size: 12px; color: var(--muted); }
+.specs dd[dir="ltr"] { text-align: right; }
+.specs dd { margin: 2px 0 0; font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.v-sec h3 { margin: 0 0 4px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.v-sec p { margin: 0; font-size: 15px; line-height: 1.6; }
+.tools { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; padding: 0; list-style: none; }
+.tools li { padding: 4px 10px; border-radius: 6px; background: var(--surface-2); font: 500 13px var(--f-mono); direction: ltr; }
+.yt { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-weight: 600; text-decoration: none; }
+.yt:hover { text-decoration: underline; }
+.v-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto; padding-top: 8px; }
+.v-nav button {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  text-align: start;
+  cursor: pointer;
+}
+.v-nav button:hover { border-color: var(--ink); }
+.v-nav small { font-size: 12px; color: var(--muted); }
+.v-nav span { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.v-nav .next { text-align: end; }
+
+@media (max-width: 900px) {
+  .v-grid { grid-template-columns: 1fr; }
+  .v-info { padding: 18px 16px 20px; }
+}
+@media (max-width: 700px) {
+  .toolbar { position: static; }
+  .v-transport { flex-wrap: wrap; gap: 10px; }
+  .scrub { order: 5; flex-basis: 100%; }
+  .v-hint { display: none; }
+  dialog.viewer { width: calc(100% - 12px); max-height: calc(100% - 12px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .playhead, .tick::before { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="page" dir="rtl" lang="he">
+
+  <header class="mast">
+    <div class="mast-top">
+      <span class="eyebrow">קטלוג סגנונות <span class="latin" lang="en">· Motion Graphics Atlas</span></span>
+      <button class="icon-btn" id="theme-btn" type="button" aria-label="החלפת ערכת צבעים">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+        <span id="theme-label">מצב כהה</span>
+      </button>
+    </div>
+    <h1>55 סגנונות של <span class="h1-en" lang="en" dir="ltr">Motion Graphics</span></h1>
+    <p class="lede">גלריית וידאו חיה: כל כרטיס מנגן לולאה קצרה שמדגימה סגנון אחד, ומתחתיה הסבר קצר. לחצו על כרטיס כדי לפתוח אותו בנגן, לעצור, לגלול בציר הזמן ולקרוא מתי כדאי להשתמש בסגנון, איך בונים אותו ובאילו כלים.</p>
+    <ul class="facts" aria-label="נתונים על הגלריה">
+      <li><b>55</b> קליפים</li>
+      <li><b>8</b> קטגוריות</li>
+      <li>לולאות של <b>3–10</b> שניות</li>
+      <li>קצב <b>8–60</b> פריימים בשנייה</li>
+    </ul>
+  </header>
+
+  <div class="toolbar">
+    <div class="tool-row">
+      <label class="search">
+        <span class="sr-only">חיפוש סגנון</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.6-4.6"/></svg>
+        <input id="q" type="search" autocomplete="off" placeholder="חיפוש: גליץ׳, רטרו, After Effects…">
+      </label>
+      <span class="count" id="count" aria-live="polite">55 / 55</span>
+      <button class="icon-btn" id="play-all" type="button" aria-pressed="false">
+        <svg id="play-all-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+        <span id="play-all-label">השהיית הקליפים</span>
+      </button>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="סינון לפי קטגוריה"></div>
+    <div class="ruler" id="ruler" aria-hidden="true"><span class="playhead" id="playhead"></span></div>
+  </div>
+
+  <main>
+    <ul class="grid" id="grid" aria-label="סגנונות"></ul>
+    <div class="empty" id="empty" hidden>
+      <p id="empty-text">לא נמצא סגנון שמתאים לחיפוש.</p>
+      <button class="icon-btn" id="reset" type="button">ניקוי החיפוש והצגת הכול</button>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p>כל ההדגמות מצוירות בקוד בזמן אמת (Canvas), בלי קובצי וידאו, ולכן הן נטענות מהר ונראות חדות בכל גודל מסך. כדי לצרף סרטון משלכם לסגנון מסוים, הוסיפו לו שדה <code>video</code> בקובץ <code>data.js</code> עם קישור ליוטיוב או לקובץ MP4.</p>
+    <p>בנגן: <kbd>רווח</kbd> ניגון והשהיה · <kbd>←</kbd> <kbd>→</kbd> הסגנון הבא והקודם · <kbd>,</kbd> <kbd>.</kbd> פריים אחורה וקדימה · <kbd>Esc</kbd> סגירה</p>
+  </footer>
+
+  <dialog class="viewer" id="viewer" aria-labelledby="v-title">
+    <div class="v-grid">
+      <div class="v-monitor">
+        <div class="v-tabs" id="v-tabs" role="tablist" aria-label="מקור" hidden>
+          <button class="v-tab" id="tab-live" type="button" role="tab" aria-selected="true">הדגמה חיה</button>
+          <button class="v-tab" id="tab-video" type="button" role="tab" aria-selected="false">סרטון</button>
+        </div>
+        <div class="v-screen" id="v-screen">
+          <canvas id="v-canvas" role="img" aria-label="הדגמה מונפשת"></canvas>
+          <div class="v-video" id="v-video" hidden></div>
+        </div>
+        <div class="v-transport" id="v-transport">
+          <button class="t-btn" id="v-play" type="button" aria-label="השהיה">
+            <svg id="v-play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+          </button>
+          <span class="tc" id="v-tc">00:00:00:00</span>
+          <input class="scrub" id="v-scrub" type="range" min="0" max="1000" step="1" value="0" aria-label="ציר הזמן">
+          <span class="tc dim" id="v-dur">00:00:06:00</span>
+          <div class="speed" role="group" aria-label="מהירות ניגון">
+            <button type="button" data-speed="0.25" aria-pressed="false">¼×</button>
+            <button type="button" data-speed="0.5" aria-pressed="false">½×</button>
+            <button type="button" data-speed="1" aria-pressed="true">1×</button>
+            <button type="button" data-speed="2" aria-pressed="false">2×</button>
+          </div>
+          <button class="t-btn" id="v-fs" type="button" aria-label="מסך מלא">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+          </button>
+        </div>
+        <p class="v-hint"><kbd>רווח</kbd> ניגון/השהיה · <kbd>,</kbd> <kbd>.</kbd> פריים אחד · <kbd>←</kbd> <kbd>→</kbd> סגנון אחר</p>
+      </div>
+
+      <div class="v-info">
+        <div class="v-head">
+          <span class="v-no" id="v-no" dir="ltr">#01</span>
+          <span class="v-cat" id="v-cat"><span class="dot"></span><span></span></span>
+          <button class="icon-btn v-close" id="v-close" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            סגירה
+          </button>
+        </div>
+        <h2 class="v-title" id="v-title"></h2>
+        <p class="v-en" id="v-en" lang="en" dir="ltr"></p>
+        <p class="v-desc" id="v-desc"></p>
+        <dl class="specs">
+          <div><dt>קצב פריימים</dt><dd id="v-fps" dir="ltr"></dd></div>
+          <div><dt>אורך הלולאה</dt><dd id="v-len"></dd></div>
+          <div><dt>מורכבות</dt><dd id="v-level"></dd></div>
+        </dl>
+        <section class="v-sec"><h3>מתאים ל</h3><p id="v-uses"></p></section>
+        <section class="v-sec"><h3>איך בונים את זה</h3><p id="v-how"></p></section>
+        <section class="v-sec"><h3>כלים נפוצים</h3><ul class="tools" id="v-tools"></ul></section>
+        <a class="yt" id="v-yt" href="#" target="_blank" rel="noopener">דוגמאות אמיתיות ביוטיוב ↗</a>
+        <nav class="v-nav" aria-label="מעבר בין סגנונות">
+          <button type="button" id="v-prev"><small>→ הקודם</small><span id="v-prev-name"></span></button>
+          <button type="button" id="v-next" class="next"><small>הבא ←</small><span id="v-next-name"></span></button>
+        </nav>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+<script src="data.js"></script>
+<script src="renderers.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
